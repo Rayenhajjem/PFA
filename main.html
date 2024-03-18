@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+   <head> 
+   <meta charset="UTF-8">
+    	<title>Energy Smart Home Controller | PFA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="event_css.css">
+	<link rel="icon" type="image/png" href="images/iconlg.png" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/animate.css"/>
+
+
+
+ </head>
+    <body>
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+	<header class="header-section">
+		<div class="container-fluid">
+			<!-- logo -->
+			<a class="site-logo">
+				<img src="images/logo.png" width="400px" height="10px" alt="">
+			</a>
+			<div class="user-panel">
+			</div>
+			<!-- responsive -->
+			<div class="nav-switch">
+				<i class="fa fa-bars"></i>
+			</div>
+			<!-- site menu -->
+		</div>
+	</header>
+<div class="contai">
+    <div class="card">
+        <div class="face front">
+            <img src="images/volt.jpg"  alt="">
+            <h3>volt</h3>
+        </div>
+		<div class="face back">
+               <h3>Voltage VALUE</h3>
+            <p class="value" id="volt" > 22 v </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="face front">
+            <img src="images/currunt.jpg"  alt="">
+            <h3>currunt</h3>
+        </div>
+		<div class="face back">
+           
+               <h3>CURRENT VALUE</h3>
+            <p class="value" id="current" > 0.01A </p>
+        </div>
+    </div>	
+	  <div class="card">
+        <div class="face front">
+            <img src="images/power.jpg"  alt="">
+            <h3>power</h3>
+        </div>
+		<div class="face back">
+		   <h3>POWER VALUE</h3>
+            <p class="value" id="power" > 22 W </p>
+        </div>
+	   </div>
+	     <div class="card">
+        <div class="face front">
+            <img src="images/energy.jpg" alt="">
+            <h3>ENERGY</h3>
+        </div>
+		<div class="face back">
+            <h3>ENERGY VALUE</h3>
+            <p class="value" id="energy" > 22 Kw/h</p>
+        </div>
+	   </div>
+	   </div>
+	   	<div class="lv">
+	<main>  
+  <nav style="--count: 4;">
+    <ul>
+      <li style="--index: 1;">
+        <a href="index.html" target="_blank" rel="noreferrer noopener">
+          <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+</svg>
+login </span>
+        </a>
+      </li>
+      <li style="--index: 2;">
+        <a href="#" target="_blank" rel="noreferrer noopener">
+          <span>
+            Facture
+          </span>
+        </a>
+      </li>
+      <li style="--index: 3;">
+        <a href="# target="_blank" rel="noreferrer noopener">
+          <span>
+            Bilan
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+	</div>
+	<script  src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+	<script  src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+	<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDon7gOE_Dtv7RHnrarQkanfhmIQv5kT7o",
+    authDomain: "pfa-db-f8d55.firebaseapp.com",
+    databaseURL: "https://pfa-db-f8d55-default-rtdb.firebaseio.com",
+    projectId: "pfa-db-f8d55",
+    storageBucket: "pfa-db-f8d55.appspot.com",
+    messagingSenderId: "1069880465667",
+    appId: "1:1069880465667:web:da10bff1f868b92c19b136"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // getting database 
+  var database = firebase.database();
+  var dataRef1 = database.ref('UsersData/energy');
+  dataRef1.on('value',function(getdata1){
+  var energ = getdata1.val();
+  document.getElementById('energy').innerHTML = energ + "KWh";
+  });
+  var dataRef2 = database.ref('UsersData/power');
+  dataRef2.on('value',function(getdata2){
+  var power = getdata2.val();
+  document.getElementById('power').innerHTML = power + "W";
+  });
+   var dataRef3 = database.ref('UsersData/voltage');
+  dataRef3.on('value',function(getdata3){
+  var volt = getdata3.val();
+  document.getElementById('volt').innerHTML = volt + "V";
+  });
+   var dataRef4 = database.ref('UsersData/current');
+  dataRef4.on('value',function(getdata4){
+  var current = getdata4.val();
+  document.getElementById('current').innerHTML = current + "A";
+  });
+	</script>
+	
+	
+	
+<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.marquee.min.js"></script>
+	<script src="js/main.js"></script>
+	
+		</body>
+		</html>
